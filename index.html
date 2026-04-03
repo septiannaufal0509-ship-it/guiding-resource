@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guiding Resources - Median &amp; Modus</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&amp;family=Lato:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+    .font-heading { font-family: 'Merriweather', Georgia, serif; }
+    .font-body { font-family: 'Lato', sans-serif; }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in-down { animation: fadeInDown 0.8s ease-out; }
+    .animate-fade-in-up { animation: fadeInUp 0.8s ease-out 0.2s both; }
+
+    .serabi-bg {
+      background: linear-gradient(135deg, #FDF6EC 0%, #FFFCF5 100%);
+      position: relative;
+    }
+    .serabi-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(196, 145, 68, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(196, 145, 68, 0.02) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .resource-card {
+      background-color: #FFFCF5;
+      border: 2px solid #E8D5B0;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(196, 145, 68, 0.08);
+    }
+
+    .card-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #FDF6EC;
+      background: linear-gradient(135deg, #C49144 0%, #A07432 100%);
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background-color: #C49144;
+      color: #FDF6EC;
+      margin-bottom: 12px;
+    }
+
+    .concept-box {
+      background-color: #FFFCF5;
+      border: 2px solid #E8D5B0;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, #F5DFA0 0%, #FFFCF5 100%);
+      border: 2px solid #C49144;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+      text-align: center;
+    }
+
+    .formula-text {
+      color: #3B2412;
+      font-size: 18px;
+      font-family: 'Times New Roman', serif;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    .step-box {
+      background-color: #FFFCF5;
+      border-left: 5px solid #C49144;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+
+    .step-number {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #C49144 0%, #A07432 100%);
+      color: #FDF6EC;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      background-color: #FFFCF5;
+    }
+
+    .data-table th {
+      background: linear-gradient(135deg, #C49144 0%, #A07432 100%);
+      color: #FDF6EC;
+      padding: 12px;
+      text-align: center;
+      font-weight: 600;
+      border: 1px solid #D4A574;
+    }
+
+    .data-table td {
+      padding: 10px 12px;
+      text-align: center;
+      border: 1px solid #E8D5B0;
+      color: #5C3D1E;
+    }
+
+    .data-table tr:nth-child(even) {
+      background-color: #F5DFA0;
+    }
+
+    .highlight-answer {
+      background-color: #FFD700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #8B6F00;
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, #F5DFA0 0%, #FFFCF5 100%);
+      border-left: 4px solid #C49144;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+
+    .steam-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .steam-s { background-color: #FFE5B4; color: #A07432; }
+    .steam-t { background-color: #B4D9FF; color: #2B5A8C; }
+    .steam-e { background-color: #D9B4FF; color: #6B3BA7; }
+    .steam-a { background-color: #B4FFD9; color: #2B7A56; }
+    .steam-m { background-color: #FFB4B4; color: #8C2B2B; }
+
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body">
+  <div id="app-wrapper" class="w-full h-full overflow-auto serabi-bg">
+   <div class="max-w-5xl mx-auto px-5 py-12 relative z-10">
+    <!-- Header -->
+    <div class="animate-fade-in-down text-center mb-12">
+     <div class="badge" style="display: inline-block;">
+      <i data-lucide="book-open" style="width: 14px; height: 14px; display: inline-block; margin-right: 6px; vertical-align: text-bottom;"></i> GUIDING RESOURCES
+     </div>
+     <h1 class="font-heading text-5xl md:text-6xl font-bold leading-tight mb-4" id="el-main-title" style="color: #3B2412;">Sumber Belajar</h1>
+     <p class="text-xl md:text-2xl" id="el-subtitle" style="color: #8B6F4E;">Pemahaman Lengkap Median, Modus &amp; Serabi Ngampin</p>
+     <div class="flex justify-center gap-2 mt-6">
+      <div style="width: 60px; height: 4px; background-color: #C49144; border-radius: 2px;"></div>
+      <div style="width: 60px; height: 4px; background-color: #D4A574; border-radius: 2px; opacity: 0.6;"></div>
+      <div style="width: 60px; height: 4px; background-color: #E8D5B0; border-radius: 2px; opacity: 0.4;"></div>
+     </div>
+    </div><!-- Intro Box -->
+    <div class="animate-fade-in-up rounded-2xl p-8 mb-10" style="background-color: #FFFCF5; border-left: 5px solid #C49144; box-shadow: 0 4px 12px rgba(196, 145, 68, 0.08);">
+     <div class="flex items-start gap-4">
+      <div style="width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; background-color: #F5DFA0;">
+       📚
+      </div>
+      <div>
+       <h3 class="font-heading font-bold text-lg mb-2" style="color: #C49144;">Apa Itu Guiding Resources?</h3>
+       <p class="leading-relaxed" id="el-intro-text" style="color: #5C3D1E;">Guiding Resources adalah kumpulan materi pembelajaran lengkap yang berisi penjelasan tentang Serabi Ngampin, rumus median dan modus, serta contoh-contoh soal yang dapat membantu kamu memahami konsep dengan lebih mendalam. Gunakan sumber daya ini sebagai referensi saat mengerjakan soal dan aktivitas pembelajaran! 📖</p>
+      </div>
+     </div>
+    </div><!-- RESOURCE 1: Budaya Serabi Ngampin -->
+    <div class="resource-card">
+     <div class="flex items-start gap-4 mb-6">
+      <div class="card-number">
+       1️⃣
+      </div>
+      <div style="flex: 1;">
+       <p class="badge">SUMBER 1</p>
+       <h2 class="font-heading font-bold text-2xl mb-2" style="color: #3B2412;">🍲 Budaya Serabi Ngampin Ambarawa</h2>
+       <p style="color: #5C3D1E; line-height: 1.6;">Pahami asal-usul, tradisi, dan hubungan Serabi Ngampin dengan pendekatan STEAM</p>
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📍 Apa Itu Serabi Ngampin?</p>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8;">Serabi Ngampin merupakan <strong>makanan tradisional khas Ambarawa, Jawa Tengah</strong> yang masih dibuat dengan cara <strong>tradisional</strong> menggunakan tungku tanah liat dan api kayu bakar. Makanan ini telah menjadi bagian dari warisan budaya lokal selama bertahun-tahun dan terus dinikmati oleh masyarakat.</p>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">🎨 Varian Rasa Serabi</p>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8;">Serabi Ngampin memiliki berbagai varian rasa yang disukai pelanggan berbeda:</p>
+      <ul style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-top: 12px; margin-left: 24px;">
+       <li>🍫 <strong>Cokelat</strong> - Rasa manis dengan cita rasa cokelat</li>
+       <li>🟨 <strong>Original</strong> - Rasa asli tradisional yang gurih</li>
+       <li>🧀 <strong>Keju</strong> - Rasa gurih dengan topping keju</li>
+       <li>🍌 <strong>Pisang</strong> - Rasa manis dari pisang yang matang</li>
+      </ul>
+     </div>
+     <div class="step-box">
+      <h3 class="font-heading font-bold" style="color: #3B2412; margin-bottom: 16px;">⚙️ Proses Produksi Tradisional</h3>
+      <div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">1</span> <span style="color: #5C3D1E; font-size: 14px;">Mempersiapkan adonan dengan resep tradisional (tepung, telur, santan, gula)</span>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">2</span> <span style="color: #5C3D1E; font-size: 14px;">Menuang adonan ke cetakan menggunakan sendok sayur (tradisional)</span>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">3</span> <span style="color: #5C3D1E; font-size: 14px;">Memasak di atas tungku tanah liat dengan api kayu bakar</span>
+       </div>
+       <div>
+        <span class="step-number">4</span> <span style="color: #5C3D1E; font-size: 14px;">Menambahkan topping sesuai varian (cokelat, keju, pisang, dll)</span>
+       </div>
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📊 Data Penjualan &amp; Analisis Statistika</p>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8;">Penjual Serabi Ngampin <strong>biasanya mencatat jumlah penjualan setiap rasa setiap hari</strong> untuk mengetahui rasa mana yang paling diminati pembeli. Data penjualan tersebut dapat dianalisis menggunakan konsep median dan modus:</p>
+      <ul style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-top: 12px; margin-left: 24px;">
+       <li><strong>📈 Median</strong> digunakan untuk mengetahui nilai tengah dari jumlah penjualan</li>
+       <li><strong>🎯 Modus</strong> digunakan untuk mengetahui rasa yang paling sering terjual</li>
+      </ul>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-top: 12px;">Dengan demikian, penjual dapat menentukan <strong>strategi produksi yang lebih efektif</strong> berdasarkan data tersebut.</p>
+     </div>
+     <div style="background: linear-gradient(135deg, #E8D5B0 0%, #FDF6EC 100%); border: 2px solid #C49144; border-radius: 12px; padding: 16px; margin: 16px 0;">
+      <div style="font-weight: 700; color: #A07432; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+       <i data-lucide="layers" style="width: 18px; height: 18px;"></i> Hubungan dengan Pendekatan STEAM
+      </div>
+      <div style="color: #5C3D1E; font-size: 14px; line-height: 1.8;">
+       <div style="margin-bottom: 12px;"><span class="steam-badge steam-s">S - SAINS</span>
+        <p style="margin-top: 4px;">Peserta didik mengamati proses pembuatan Serabi Ngampin dan memahami perubahan bahan saat dimasak (reaksi kimia, perubahan warna, tekstur).</p>
+       </div>
+       <div style="margin-bottom: 12px;"><span class="steam-badge steam-t">T - TEKNOLOGI</span>
+        <p style="margin-top: 4px;">Peserta didik menggunakan alat bantu seperti kalkulator atau spreadsheet sederhana untuk mengolah data penjualan dan mencari median/modus.</p>
+       </div>
+       <div style="margin-bottom: 12px;"><span class="steam-badge steam-e">E - ENGINEERING</span>
+        <p style="margin-top: 4px;">Peserta didik merancang strategi produksi berdasarkan hasil analisis median dan modus untuk meningkatkan efisiensi usaha.</p>
+       </div>
+       <div style="margin-bottom: 12px;"><span class="steam-badge steam-a">A - ARTS</span>
+        <p style="margin-top: 4px;">Peserta didik mengenal variasi bentuk dan tampilan Serabi Ngampin yang menarik bagi pembeli, serta seni tradisional pembuatannya.</p>
+       </div>
+       <div><span class="steam-badge steam-m">M - MATEMATIKA</span>
+        <p style="margin-top: 4px;">Peserta didik menganalisis data penjualan menggunakan konsep median, modus, dan statistika deskriptif lainnya.</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- RESOURCE 2: Rumus Median -->
+    <div class="resource-card">
+     <div class="flex items-start gap-4 mb-6">
+      <div class="card-number">
+       2️⃣
+      </div>
+      <div style="flex: 1;">
+       <p class="badge">SUMBER 2</p>
+       <h2 class="font-heading font-bold text-2xl mb-2" style="color: #3B2412;">📐 Rumus Median</h2>
+       <p style="color: #5C3D1E; line-height: 1.6;">Pelajari definisi dan rumus untuk menghitung median dari sekumpulan data</p>
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📊 Definisi Median</p>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8;">Median adalah <strong>nilai tengah</strong> dari suatu kumpulan data yang telah diurutkan dari terkecil ke terbesar (atau sebaliknya). Median membagi data menjadi dua bagian yang sama besar: separuh data di bawah median dan separuh data di atas median.</p>
+     </div>
+     <div class="formula-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 16px;">✅ Rumus Median</p>
+      <div style="margin-bottom: 16px;">
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 8px;"><strong>Jika jumlah data GANJIL:</strong></p>
+       <div class="formula-text">
+        $$\text{Median} = \text{Data ke-} \frac{n+1}{2}$$
+       </div>
+      </div>
+      <div>
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 8px;"><strong>Jika jumlah data GENAP:</strong></p>
+       <div class="formula-text">
+        $$\text{Median} = \frac{\text{Data ke-} \frac{n}{2} + \text{Data ke-} \left(\frac{n}{2}+1\right)}{2}$$
+       </div>
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📝 Keterangan Rumus:</p>
+      <ul style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-left: 24px;">
+       <li><strong>Median</strong> = Nilai tengah data</li>
+       <li><strong>n</strong> = Jumlah total data</li>
+       <li><strong>Data ke-</strong> = Posisi data setelah diurutkan dari terkecil ke terbesar</li>
+      </ul>
+     </div>
+     <div class="tip-box">
+      <p style="color: #A07432; font-weight: 600;"><i data-lucide="lightbulb" style="width: 14px; height: 14px; display: inline; vertical-align: text-bottom;"></i> Tips Penting:</p>
+      <p style="color: #5C3D1E; font-size: 14px; margin-top: 6px;"><strong>SELALU URUTKAN DATA TERLEBIH DAHULU!</strong> Median hanya bisa dihitung dari data yang sudah terurut. Jangan lupa untuk membedakan antara data ganjil dan genap!</p>
+     </div><!-- CONTOH SOAL MEDIAN -->
+     <div class="step-box" style="background-color: #FFF9E6; border-left-color: #C49144; margin-top: 24px;">
+      <h3 class="font-heading font-bold text-lg" style="color: #3B2412; margin-bottom: 16px;">📖 Contoh Soal Median</h3>
+      <div class="concept-box">
+       <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-bottom: 12px;"><strong>Seorang penjual Serabi Ngampin mencatat jumlah penjualan selama beberapa hari sebagai berikut:</strong></p>
+       <p style="color: #3B2412; font-size: 16px; font-family: 'Courier New', monospace; background-color: #F5DFA0; padding: 12px; border-radius: 6px; text-align: center; font-weight: bold;">45, 50, 48, 52, 47, 55, 60</p>
+      </div>
+      <div style="margin-top: 16px;">
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 16px;"><strong>Langkah Penyelesaian:</strong></p>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">1</span> <span style="color: #3B2412; font-weight: 600;">Urutkan data dari terkecil ke terbesar:</span>
+        <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px; font-family: 'Courier New', monospace;">45, 47, 48, 50, 52, 55, 60</p>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">2</span> <span style="color: #3B2412; font-weight: 600;">Tentukan jumlah data:</span>
+        <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px;">n = 7 <span style="background-color: #FFE5B4; padding: 2px 6px; border-radius: 4px;">(GANJIL)</span></p>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">3</span> <span style="color: #3B2412; font-weight: 600;">Gunakan rumus untuk data ganjil:</span>
+        <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px;">Median = Data ke-<sup>(n+1)</sup>/<sub>2</sub> = Data ke-<sup>(7+1)</sup>/<sub>2</sub> = Data ke-<sup>8</sup>/<sub>2</sub> = <strong>Data ke-4</strong></p>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">4</span> <span style="color: #3B2412; font-weight: 600;">Ambil data ke-4 dari urutan:</span>
+        <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px; font-family: 'Courier New', monospace;">45, 47, 48, <span class="highlight-answer">50</span>, 52, 55, 60</p>
+       </div>
+      </div>
+      <div class="concept-box">
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 8px;">✅ Jawaban:</p>
+       <p style="color: #5C3D1E; font-size: 14px; background-color: #F5DFA0; padding: 12px; border-radius: 6px; font-weight: 600;">Jadi median penjualan Serabi Ngampin adalah <span class="highlight-answer">50 buah</span>.</p>
+      </div>
+     </div>
+    </div><!-- RESOURCE 3: Rumus Modus -->
+    <div class="resource-card">
+     <div class="flex items-start gap-4 mb-6">
+      <div class="card-number">
+       3️⃣
+      </div>
+      <div style="flex: 1;">
+       <p class="badge">SUMBER 3</p>
+       <h2 class="font-heading font-bold text-2xl mb-2" style="color: #3B2412;">🎯 Rumus Modus</h2>
+       <p style="color: #5C3D1E; line-height: 1.6;">Pelajari definisi dan cara menentukan modus dari sekumpulan data</p>
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📊 Definisi Modus</p>
+      <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8;"><strong>Modus adalah nilai yang paling sering muncul</strong> dalam suatu kumpulan data. Modus menunjukkan apa yang paling umum atau paling tipikal dalam data. Data dapat memiliki satu modus (unimodal), dua modus (bimodal), atau lebih (multimodal).</p>
+     </div>
+     <div class="formula-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 16px;">✅ Rumus Modus</p>
+      <div class="formula-text">
+       Modus = Data dengan frekuensi terbanyak
+      </div>
+     </div>
+     <div class="concept-box">
+      <p style="color: #3B2412; font-weight: 600; margin-bottom: 12px;">📝 Keterangan Rumus:</p>
+      <ul style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-left: 24px;">
+       <li><strong>Modus</strong> = Nilai yang paling sering muncul</li>
+       <li><strong>Frekuensi</strong> = Banyaknya kemunculan sebuah nilai dalam data</li>
+      </ul>
+     </div>
+     <div class="tip-box">
+      <p style="color: #A07432; font-weight: 600;"><i data-lucide="lightbulb" style="width: 14px; height: 14px; display: inline; vertical-align: text-bottom;"></i> Tips Menemukan Modus:</p>
+      <p style="color: #5C3D1E; font-size: 14px; margin-top: 6px;">Buat tabel frekuensi atau gunakan tally mark untuk menghitung berapa kali setiap nilai muncul. Nilai dengan frekuensi tertinggi adalah modus!</p>
+     </div><!-- CONTOH SOAL MODUS -->
+     <div class="step-box" style="background-color: #FFF9E6; border-left-color: #C49144; margin-top: 24px;">
+      <h3 class="font-heading font-bold text-lg" style="color: #3B2412; margin-bottom: 16px;">📖 Contoh Soal Modus</h3>
+      <div class="concept-box">
+       <p style="color: #5C3D1E; font-size: 14px; line-height: 1.8; margin-bottom: 12px;"><strong>Data rasa serabi yang paling banyak dipilih pengunjung:</strong></p>
+       <p style="color: #3B2412; font-size: 14px; font-family: 'Courier New', monospace; background-color: #F5DFA0; padding: 12px; border-radius: 6px; line-height: 1.8;">Cokelat, Keju, Cokelat, Original, Cokelat, Keju, Pisang, Cokelat, Keju, Original</p>
+      </div>
+      <div style="margin-top: 16px;">
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 16px;"><strong>Langkah Penyelesaian:</strong></p>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">1</span> <span style="color: #3B2412; font-weight: 600;">Identifikasi setiap nilai unik dalam data</span>
+        <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px;">Nilai unik: Cokelat, Keju, Original, Pisang</p>
+       </div>
+       <div style="margin-bottom: 12px;">
+        <span class="step-number">2</span> <span style="color: #3B2412; font-weight: 600;">Buat tabel frekuensi dan hitung kemunculan setiap rasa</span>
+       </div>
+      </div>
+      <table class="data-table">
+       <tbody>
+        <tr>
+         <th>Rasa Serabi</th>
+         <th>Tally Mark</th>
+         <th>Frekuensi</th>
+        </tr>
+        <tr>
+         <td><strong>🍫 Cokelat</strong></td>
+         <td style="font-size: 16px; letter-spacing: 2px;">||||</td>
+         <td style="background-color: #FFB4B4; font-weight: 600;">4 kali</td>
+        </tr>
+        <tr>
+         <td><strong>🧀 Keju</strong></td>
+         <td style="font-size: 16px; letter-spacing: 2px;">|||</td>
+         <td>3 kali</td>
+        </tr>
+        <tr>
+         <td><strong>🟨 Original</strong></td>
+         <td style="font-size: 16px; letter-spacing: 2px;">||</td>
+         <td>2 kali</td>
+        </tr>
+        <tr>
+         <td><strong>🍌 Pisang</strong></td>
+         <td style="font-size: 16px; letter-spacing: 2px;">|</td>
+         <td>1 kali</td>
+        </tr>
+       </tbody>
+      </table>
+      <div style="margin-top: 16px; margin-bottom: 12px;">
+       <span class="step-number">3</span> <span style="color: #3B2412; font-weight: 600;">Temukan frekuensi terbanyak</span>
+       <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px;">Frekuensi tertinggi adalah <span class="highlight-answer">4 kali</span> (milik Cokelat)</p>
+      </div>
+      <div style="margin-bottom: 12px;">
+       <span class="step-number">4</span> <span style="color: #3B2412; font-weight: 600;">Kesimpulan</span>
+       <p style="color: #5C3D1E; font-size: 14px; margin-left: 52px; margin-top: 6px; font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold;">Modus = <span class="highlight-answer">Cokelat 🍫</span></p>
+      </div>
+      <div class="concept-box">
+       <p style="color: #3B2412; font-weight: 600; margin-bottom: 8px;">✅ Kesimpulan:</p>
+       <p style="color: #5C3D1E; font-size: 14px; background-color: #F5DFA0; padding: 12px; border-radius: 6px; font-weight: 600;">Jadi rasa yang paling banyak diminati adalah Serabi rasa <strong>Cokelat</strong> dengan frekuensi <span class="highlight-answer">4 kali</span>.</p>
+      </div>
+     </div>
+    </div><!-- Closing -->
+    <div class="animate-fade-in-up rounded-2xl p-8 text-center mb-10" style="background: linear-gradient(135deg, #3B2412 0%, #5C3D1E 100%); color: #FDF6EC;">
+     <div class="flex justify-center mb-4">
+      <i data-lucide="bookmark" style="width: 40px; height: 40px;"></i>
+     </div>
+     <h3 class="font-heading text-2xl font-bold mb-3" id="el-closing-label">Referensi Lengkap! 📚</h3>
+     <p class="leading-relaxed mb-4 text-lg" id="el-closing-text">Selamat! Kamu sudah mempelajari semua sumber belajar tentang Serabi Ngampin, rumus median, dan rumus modus. Gunakan referensi ini sebagai panduan saat mengerjakan soal-soal latihan dan aktivitas pembelajaran. Dengan pemahaman yang kuat, kamu siap menguasai konsep statistika! 🚀📊</p>
+     <p style="color: #D4A574; font-size: 14px; margin-top: 12px;">Kembali ke Guiding Activities untuk mengerjakan soal-soal dan aktivitas pembelajaran! 💪</p>
+    </div><!-- Footer -->
+    <div class="animate-fade-in-up text-center">
+     <p class="text-xs" style="color: #B89B6A;">LKPD Matematika Kelas 8 • Statistika • Guiding Resources • Median &amp; Modus • Budaya Serabi Ngampin</p>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Sumber Belajar",
+      subtitle: "Pemahaman Lengkap Median, Modus & Serabi Ngampin",
+      intro_text: "Guiding Resources adalah kumpulan materi pembelajaran lengkap yang berisi penjelasan tentang Serabi Ngampin, rumus median dan modus, serta contoh-contoh soal yang dapat membantu kamu memahami konsep dengan lebih mendalam. Gunakan sumber daya ini sebagai referensi saat mengerjakan soal dan aktivitas pembelajaran! 📖",
+      closing_label: "Referensi Lengkap! 📚",
+      closing_text: "Selamat! Kamu sudah mempelajari semua sumber belajar tentang Serabi Ngampin, rumus median, dan rumus modus. Gunakan referensi ini sebagai panduan saat mengerjakan soal-soal latihan dan aktivitas pembelajaran. Dengan pemahaman yang kuat, kamu siap menguasai konsep statistika! 🚀📊",
+      background_color: "#FDF6EC",
+      surface_color: "#FFFCF5",
+      text_color: "#3B2412",
+      primary_action_color: "#C49144",
+      secondary_action_color: "#5C3D1E",
+      font_family: "Merriweather",
+      font_size: 16
+    };
+
+    function applyConfig(config) {
+      const c = { ...defaultConfig, ...config };
+
+      document.getElementById('el-main-title').textContent = c.main_title;
+      document.getElementById('el-subtitle').textContent = c.subtitle;
+      document.getElementById('el-intro-text').innerHTML = c.intro_text;
+      document.getElementById('el-closing-label').textContent = c.closing_label;
+      document.getElementById('el-closing-text').innerHTML = c.closing_text;
+
+      const wrapper = document.getElementById('app-wrapper');
+      wrapper.style.backgroundColor = c.background_color;
+
+      document.querySelectorAll('.font-heading').forEach(el => {
+        el.style.fontFamily = `${c.font_family}, Georgia, serif`;
+        el.style.color = c.text_color;
+      });
+
+      const base = c.font_size;
+      document.getElementById('el-main-title').style.fontSize = `${base * 2.8}px`;
+      document.getElementById('el-subtitle').style.fontSize = `${base * 1.3}px`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => applyConfig(config),
+        mapToCapabilities: (config) => {
+          const c = { ...defaultConfig, ...config };
+          const mkColor = (key) => ({
+            get: () => c[key] || defaultConfig[key],
+            set: (v) => { c[key] = v; window.elementSdk.setConfig({ [key]: v }); }
+          });
+          return {
+            recolorables: [
+              mkColor('background_color'),
+              mkColor('surface_color'),
+              mkColor('text_color'),
+              mkColor('primary_action_color'),
+              mkColor('secondary_action_color')
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => c.font_family || defaultConfig.font_family,
+              set: (v) => { c.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+            },
+            fontSizeable: {
+              get: () => c.font_size || defaultConfig.font_size,
+              set: (v) => { c.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+            }
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const c = { ...defaultConfig, ...config };
+          return new Map([
+            ["main_title", c.main_title],
+            ["subtitle", c.subtitle],
+            ["intro_text", c.intro_text],
+            ["closing_label", c.closing_label],
+            ["closing_text", c.closing_text]
+          ]);
+        }
+      });
+    }
+
+    lucide.createIcons();
+
+    if (window.MathJax) {
+      MathJax.contentDocument = document;
+      MathJax.typesetPromise().catch(err => console.log('MathJax rendering error:', err));
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e68760554ee457a',t:'MTc3NTIyMzM3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
